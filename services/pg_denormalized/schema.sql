@@ -12,7 +12,7 @@ CREATE TABLE tweets_jsonb (
 
 --CREATE INDEX tweets_jsonb_idx ON tweets_jsonb USING GIN (data);
 --CREATE INDEX tweets_jsonb_idx2 ON tweets_jsonb USING GIN ((data) jsonb_path_ops);
-CREATE INDEX tweets_jsonb_idx3 ON tweets_jsonb USING GIN ((data->'entities'->'hashtags'));
+--CREATE INDEX tweets_jsonb_idx3 ON tweets_jsonb USING GIN ((data->'entities'->'hashtags'));
 
 --------------------------------------------------------------------------------    
 -- the views below represent normalized tables
@@ -41,6 +41,7 @@ CREATE VIEW tweets AS (
         data->>'source' AS source
     FROM tweets_jsonb
 );
+
 
 CREATE VIEW tweet_mentions AS (
     SELECT DISTINCT id_tweets, jsonb->>'id' AS id_users
